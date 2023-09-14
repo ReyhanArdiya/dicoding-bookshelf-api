@@ -1,0 +1,31 @@
+{
+    "name": "dicoding-bookshelf-api",
+    "version": "1.0.0",
+    "description": "Final project for Dicoding's \"Belajar Membuat Aplikasi Back-End untuk Pemula dengan Google Cloud\" course",
+    "main": "index.js",
+    "scripts": {
+        "start": "NODE_ENV=production node src/server.js",
+        "dev": "nodemon src/server.js",
+        "lint": "eslint src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ReyhanArdiya/dicoding-bookshelf-api.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ReyhanArdiya/dicoding-bookshelf-api/issues"
+    },
+    "homepage": "https://github.com/ReyhanArdiya/dicoding-bookshelf-api#readme",
+    "devDependencies": {
+        "eslint": "^8.49.0",
+        "eslint-config-google": "^0.14.0",
+        "nodemon": "^3.0.1"
+    },
+    "dependencies": {
+        "@hapi/hapi": "^21.3.2",
+        "nanoid": "^5.0.1"
+    }
+}
