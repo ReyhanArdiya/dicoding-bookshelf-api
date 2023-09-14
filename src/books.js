@@ -54,6 +54,76 @@ class Book {
 const books = new Map();
 
 // UTILS
+const saveBook = (book) => {
+  const {
+    name,
+    pageCount,
+    readPage,
+  } = book;
+
+  if (!name) {
+    throw new Error('Gagal menambahkan buku. Mohon isi nama buku');
+  }
+
+  if (readPage > pageCount) {
+    // eslint-disable-next-line max-len
+    throw new Error('Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount');
+  }
+
+  books.set(book.id, book);
+};
+
+const listBooks = () => [...books.values()];
+
+const getBookById = (id) => {
+  const book = books.get(id);
+
+  if (!book) {
+    throw new Error('Buku tidak ditemukan');
+  }
+
+  return book;
+};
+
+const updateBook = (newBookData) => {
+  const {
+    name,
+    pageCount,
+    readPage,
+  } = newBookData;
+
+  if (!name) {
+    throw new Error('Gagal memperbarui buku. Mohon isi nama buku');
+  }
+
+  if (readPage > pageCount) {
+    // eslint-disable-next-line max-len
+    throw new Error('Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount');
+  }
+
+  const originalBook = {...books.get(newBookData.id)};
+
+  if (!originalBook) {
+    throw new Error('Gagal memperbarui buku. Id tidak ditemukan');
+  };
+
+  for (const key of Object.keys(newBookData)) {
+    originalBook[key] = newBookData[key];
+  }
+
+  books.set(originalBook.id, originalBook);
+};
+
+const deleteBookById = (id) => {
+  const book = books.delete(id);
+
+  if (!book) {
+    throw new Error('Buku gagal dihapus. Id tidak ditemukan');
+  }
+
+  return book;
+};
+
 const filterBooksByName = (name) => {
   const filteredBooks = [];
 
