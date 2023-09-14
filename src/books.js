@@ -53,4 +53,47 @@ class Book {
  */
 const books = new Map();
 
-module.exports = {books, Book};
+// UTILS
+const filterBooksByName = (name) => {
+  const filteredBooks = [];
+
+  for (const book of books.values()) {
+    if (book.name.toLowerCase().match(name, 'gi')) {
+      filteredBooks.push(book);
+    }
+  }
+
+  return filteredBooks;
+};
+
+const filterBooksByReading = (reading = true) => {
+  const filteredBooks = [];
+
+  for (const book of books.values()) {
+    if (book.reading === reading) {
+      filteredBooks.push(book);
+    }
+  }
+
+  return filteredBooks;
+};
+
+const filterBooksByFinished = (finished = true) => {
+  const filteredBooks = [];
+
+  for (const book of books.values()) {
+    if (book.finished === finished) {
+      filteredBooks.push(book);
+    }
+  }
+
+  return filteredBooks;
+};
+
+module.exports = {
+  books,
+  Book,
+  filterBooksByName,
+  filterBooksByReading,
+  filterBooksByFinished,
+};
