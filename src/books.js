@@ -5,7 +5,7 @@ const nanoId = require('nanoid');
  */
 class Book {
   /**
-     *
+     * Expects an object for easier destructuring
      * @param {string} name
      * @param {number} year
      * @param {string} author
@@ -19,20 +19,20 @@ class Book {
      * @param {string} updatedAt
      * @param {string} id
      */
-  constructor(
-      name,
-      year,
-      author,
-      summary,
-      publisher,
-      pageCount,
-      readPage,
-      reading,
-      finished = pageCount === readPage,
-      insertedAt = new Date().toISOString(),
-      updatedAt = insertedAt,
-      id = nanoId.nanoid(16),
-  ) {
+  constructor({
+    name,
+    year,
+    author,
+    summary,
+    publisher,
+    pageCount,
+    readPage,
+    reading,
+    finished = pageCount === readPage,
+    insertedAt = new Date().toISOString(),
+    updatedAt = insertedAt,
+    id = nanoId.nanoid(16),
+  }) {
     this.name = name;
     this.year = year;
     this.author = author;
@@ -47,6 +47,7 @@ class Book {
     this.id = id;
   }
 }
+
 
 /**
  * @type {Map<string, Book>}
@@ -166,4 +167,9 @@ module.exports = {
   filterBooksByName,
   filterBooksByReading,
   filterBooksByFinished,
+  saveBook,
+  listBooks,
+  getBookById,
+  updateBook,
+  deleteBookById,
 };
