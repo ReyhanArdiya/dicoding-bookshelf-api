@@ -1,4 +1,5 @@
 const nanoId = require('nanoid');
+const {HttpError} = require('./errors');
 
 /**
  * @class Book
@@ -67,12 +68,12 @@ const saveBook = (book) => {
   } = book;
 
   if (!name) {
-    throw new Error('Gagal menambahkan buku. Mohon isi nama buku');
+    throw new HttpError(400, 'Gagal menambahkan buku. Mohon isi nama buku');
   }
 
   if (readPage > pageCount) {
     // eslint-disable-next-line max-len
-    throw new Error('Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount');
+    throw new HttpError(400, 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount');
   }
 
   books.set(book.id, book);
@@ -84,7 +85,7 @@ const getBookById = (id) => {
   const book = books.get(id);
 
   if (!book) {
-    throw new Error('Buku tidak ditemukan');
+    throw new HttpError(404, 'Buku tidak ditemukan');
   }
 
   return book;
@@ -98,19 +99,19 @@ const updateBook = (newBookData) => {
   } = newBookData;
 
   if (!name) {
-    throw new Error('Gagal memperbarui buku. Mohon isi nama buku');
+    throw new HttpError(400, 'Gagal memperbarui buku. Mohon isi nama buku');
   }
 
   if (readPage > pageCount) {
     // eslint-disable-next-line max-len
-    throw new Error('Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount');
+    throw new HttpError(400, 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount');
   }
 
-  const originalBook = {...books.get(newBookData.id)};
-
-  if (!originalBook) {
-    throw new Error('Gagal memperbarui buku. Id tidak ditemukan');
+  if (!books.has(newBookData.id)) {
+    throw new HttpError(404, 'Gagal memperbarui buku. Id tidak ditemukan');
   };
+
+  const originalBook = {...books.get(newBookData.id)};
 
   for (const key of Object.keys(newBookData)) {
     originalBook[key] = newBookData[key];
@@ -123,7 +124,7 @@ const deleteBookById = (id) => {
   const book = books.delete(id);
 
   if (!book) {
-    throw new Error('Buku gagal dihapus. Id tidak ditemukan');
+    throw new HttpError(404, 'Buku gagal dihapus. Id tidak ditemukan');
   }
 
   return book;
