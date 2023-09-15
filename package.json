@@ -4,6 +4,7 @@
     "description": "Final project for Dicoding's \"Belajar Membuat Aplikasi Back-End untuk Pemula dengan Google Cloud\" course",
     "main": "index.js",
     "scripts": {
+        "start:windows": "SET NODE_ENV=production & node src/server.js",
         "start": "NODE_ENV=production node src/server.js",
         "dev": "nodemon src/server.js",
         "lint": "eslint src"
