@@ -55,6 +55,10 @@ class Book {
 const books = new Map();
 
 // UTILS
+const extractBookFromRequest = (request) => {
+  return new Book(...request.payload);
+};
+
 const saveBook = (book) => {
   const {
     name,
@@ -172,4 +176,5 @@ module.exports = {
   getBookById,
   updateBook,
   deleteBookById,
+  extractBookFromRequest,
 };
