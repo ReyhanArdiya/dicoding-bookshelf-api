@@ -1,6 +1,7 @@
 const {
   extractBookFromRequest,
   saveBook,
+  listBooks,
 } = require('./books');
 
 const handleSaveBook = (request, h) => {
@@ -32,6 +33,21 @@ const handleSaveBook = (request, h) => {
   return response;
 };
 
+const handleListBooks = (_request, h) => {
+  const books = listBooks();
+
+  const response = h.response({
+    status: 'success',
+    data: {
+      books,
+    },
+  });
+  response.code(200);
+
+  return response;
+};
+
 module.exports = {
   handleSaveBook,
+  handleListBooks,
 };

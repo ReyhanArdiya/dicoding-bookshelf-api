@@ -79,7 +79,19 @@ const saveBook = (book) => {
   books.set(book.id, book);
 };
 
-const listBooks = () => [...books.values()];
+const listBooks = () => {
+  const normalizedBooks = [];
+
+  for (const book of books.values()) {
+    normalizedBooks.push({
+      id: book.id,
+      name: book.name,
+      publisher: book.publisher,
+    });
+  }
+
+  return normalizedBooks;
+};
 
 const getBookById = (id) => {
   const book = books.get(id);
