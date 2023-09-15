@@ -57,7 +57,7 @@ const books = new Map();
 
 // UTILS
 const extractBookFromRequest = (request) => {
-  return new Book(...request.payload);
+  return new Book({...request.payload});
 };
 
 const saveBook = (book) => {
