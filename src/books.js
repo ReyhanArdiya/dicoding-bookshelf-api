@@ -132,7 +132,7 @@ const updateBook = (newBookData) => {
   books.set(originalBook.id, originalBook);
 };
 
-const deleteBookById = (id) => {
+const deleteBook = (id) => {
   const book = books.delete(id);
 
   if (!book) {
@@ -188,6 +188,6 @@ module.exports = {
   listBooks,
   getBookById,
   updateBook,
-  deleteBookById,
+  deleteBook,
   extractBookFromRequest,
 };
