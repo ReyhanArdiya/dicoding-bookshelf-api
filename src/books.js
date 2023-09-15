@@ -103,7 +103,7 @@ const getBookById = (id) => {
   return book;
 };
 
-const updateBook = (newBookData) => {
+const updateBook = (id, newBookData) => {
   const {
     name,
     pageCount,
@@ -119,11 +119,11 @@ const updateBook = (newBookData) => {
     throw new HttpError(400, 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount');
   }
 
-  if (!books.has(newBookData.id)) {
+  if (!books.has(id)) {
     throw new HttpError(404, 'Gagal memperbarui buku. Id tidak ditemukan');
   };
 
-  const originalBook = {...books.get(newBookData.id)};
+  const originalBook = {...books.get(id)};
 
   for (const key of Object.keys(newBookData)) {
     originalBook[key] = newBookData[key];
