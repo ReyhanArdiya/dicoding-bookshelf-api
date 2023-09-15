@@ -79,18 +79,34 @@ const saveBook = (book) => {
   books.set(book.id, book);
 };
 
-const listBooks = () => {
-  const normalizedBooks = [];
+const listBooks = (q = {}) => {
+  const {name, reading, finished} = q;
 
-  for (const book of books.values()) {
-    normalizedBooks.push({
-      id: book.id,
-      name: book.name,
-      publisher: book.publisher,
-    });
+  let filteredBooks = [];
+
+  books.forEach((book) => filteredBooks.push({...book}));
+
+  if (name) {
+    filteredBooks = filteredBooks.filter(
+        (book) => book.name.toLowerCase().includes(name.toLowerCase()),
+    );
   }
 
-  return normalizedBooks;
+  if (reading) {
+    filteredBooks = filteredBooks
+        .filter((book) => book.reading === Boolean(+reading));
+  }
+
+  if (finished) {
+    filteredBooks = filteredBooks
+        .filter((book) => book.finished === Boolean(+finished));
+  }
+
+  return filteredBooks.map((book) => ({
+    id: book.id,
+    name: book.name,
+    publisher: book.publisher,
+  }));
 };
 
 const getBookById = (id) => {
